@@ -3,9 +3,7 @@ using TMPro;
 public class UIManager : MonoBehaviour
 {
     public static UIManager Instance { get; private set; }
-    public TextMeshProUGUI scoreText;
-    public TextMeshProUGUI avgText;
-    public TimerController timer;
+    public ScoreBoard scoreBoard;
     public ValidWordsPanel validWordsPanel;
     public BoardContainer boardContainer;
     void Awake()
@@ -19,14 +17,21 @@ public class UIManager : MonoBehaviour
             Instance = this;
     }
 
-    public void UpdateScore(int total, int avg)
+    public void UpdateScore(float total, float avg)
     {
-        scoreText.text = total.ToString();
-        avgText.text = avg.ToString();
+        scoreBoard.SetTotalScoreText(total.ToString());
+        scoreBoard.SetAverageScoreText(avg.ToString());
     }
-    public void UpdateTime(int seconds)
+    public void UpdateTimer(int seconds)
     {
+        var timer = scoreBoard.GetTimer();
         if (timer != null) timer.SetTime(seconds);
+    }
+
+    public void UpdateTimerVisibility(bool enable)
+    {
+        var timer = scoreBoard.GetTimer();
+        if (timer != null) timer.gameObject.SetActive(enable);
     }
 
     public BoardContainer GetBoardContainer()

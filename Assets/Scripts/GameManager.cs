@@ -25,18 +25,22 @@ public class GameManager : MonoBehaviour
         {
             case GameMode.Endless:
                 endlessManager.Init();
+                UIManager.Instance.UpdateTimerVisibility(false);
                 break;
             case GameMode.Levels:
                 levelManager.Init(selectedLevelIndex);
+                UIManager.Instance.UpdateTimerVisibility(true);
                 break;
         }
     }
 
     public void Reset()
     {
-        UIManager.Instance.GetBoardContainer().ClearTiles();
-        UIManager.Instance.GetValidWordsPanel().ClearPanel();
+        var boardContainer = UIManager.Instance.GetBoardContainer();
+        boardContainer.ClearTiles();
+        boardContainer.ClearLastTileIndex();
         ScoreManager.Instance.ResetScore();
+        UIManager.Instance.GetValidWordsPanel().ClearPanel();
     }
 
     public int GetBoardWidth()

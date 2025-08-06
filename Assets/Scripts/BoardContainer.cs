@@ -6,12 +6,13 @@ public class BoardContainer : MonoBehaviour
     public GameObject letterTilePrefab;
     public GridLayoutGroup gridLayout;
     private TileController[,] grid;
-    private int columns=0, rows=0;
+    private int columns = 0, rows = 0;
+    private int lastTileIndex = 0;
 
     /// <summary>
     /// Builds grid from raw level data
     /// </summary>
-    public void BuildGrid(LevelDataRaw data)
+    public void BuildGrid(DataRaw data)
     {
         columns = data.gridSize.x;
         rows = data.gridSize.y;
@@ -28,11 +29,16 @@ public class BoardContainer : MonoBehaviour
         gridParentRt.sizeDelta = new Vector2(gridWidth, gridHeight);
 
         grid = new TileController[rows, columns];
+        if(data.gridData.Length<(rows*columns))
+        {
+            Debug.LogError("Grid size is greater than Grid data count!");
+            return;
+        }
         for (int x = 0; x < rows; x++)
         {
             for (int y = 0; y < columns; y++)
             {
-                int idx = y * rows + x;
+                int idx = x * columns + y;
                 var go = Instantiate(letterTilePrefab, gridLayout.transform);
                 var tc = go.GetComponent<TileController>();
                 tc.UnlockTilePosition();
@@ -40,6 +46,7 @@ public class BoardContainer : MonoBehaviour
                 grid[x, y] = tc;
             }
         }
+        lastTileIndex = columns * rows;
         Canvas.ForceUpdateCanvases();
         LayoutRebuilder.ForceRebuildLayoutImmediate(gridLayout.GetComponent<RectTransform>());
         LockTilePositions();
@@ -58,11 +65,26 @@ public class BoardContainer : MonoBehaviour
 
     public void ClearTiles()
     {
-        for(int i=0;i<gridLayout.transform.childCount;i++)
+        for (int i = 0; i < gridLayout.transform.childCount; i++)
         {
             Destroy(gridLayout.transform.GetChild(i).gameObject);
         }
 
+    }
+    
+    public int GetLastTileIndex()
+    {
+        return lastTileIndex;
+    }
+
+    public void UpdateLastTileIndex(int newIndex)
+    {
+        lastTileIndex = newIndex;
+    }
+
+    public void ClearLastTileIndex()
+    {
+        lastTileIndex = 0;
     }
 
     public int GetBoardWidth() => columns;

@@ -70,6 +70,6 @@ public class TimerController : MonoBehaviour
         timeText.text = $"{minutes:00}:{seconds:00}";
 
         // (Optional) sync with UIManager if other UI elements depend on time
-        UIManager.Instance?.UpdateTime((int)remainingTime);
+        UIManager.Instance?.UpdateTimer((int)remainingTime);
     }
 }

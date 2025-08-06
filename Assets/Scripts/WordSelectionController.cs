@@ -9,6 +9,7 @@ public class WordSelectionController : MonoBehaviour
     [SerializeField] private WordHighlighter wordHighlighter;  // ① reference to your LineRenderer handler
 
     private List<TileController> selected = new List<TileController>();
+    private List<TileController> selectedCopy = null;
 
     void Awake()
     {
@@ -84,6 +85,7 @@ public class WordSelectionController : MonoBehaviour
             {
                 foreach (var t in selected)
                     t.Consume();
+                FetchNewTiles(selected);
                 GameManager.Instance.endlessManager.OnWordFound(word);
             }
             else
@@ -92,5 +94,27 @@ public class WordSelectionController : MonoBehaviour
 
         // reset for next drag
         selected.Clear();
+    }
+
+    private void FetchNewTiles(List<TileController> selected)
+    {
+        selectedCopy = new List<TileController>(selected);
+        Invoke(nameof(FetchAndUpdateNewTilesData), 0.5f);
+    }
+
+    private void FetchAndUpdateNewTilesData()
+    {
+        var boardContainer = UIManager.Instance.GetBoardContainer();
+        var newData = JSONLoader.LoadEndless();
+        for (int i = 0; i < selectedCopy.Count; i++)
+        {
+            if (boardContainer.GetLastTileIndex() + i == newData.gridData.Length)
+                boardContainer.UpdateLastTileIndex(-i);//loop again from the first
+            var newTile = newData.gridData[boardContainer.GetLastTileIndex() + i];
+            var gridPos = selectedCopy[i].GridPosition;
+            selectedCopy[i].Initialize(newTile.letter, newTile.tileType, gridPos);
+            selectedCopy[i].gameObject.SetActive(true);
+        }
+        boardContainer.UpdateLastTileIndex(boardContainer.GetLastTileIndex() + selectedCopy.Count);
     }
 }

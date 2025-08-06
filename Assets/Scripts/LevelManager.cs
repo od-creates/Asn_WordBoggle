@@ -1,7 +1,7 @@
 using UnityEngine;
 public class LevelManager : MonoBehaviour
 {
-    private LevelDataRaw[] levels;
+    private DataRaw[] levels;
     public TimerController timer;
 
     void Awake()
@@ -15,7 +15,7 @@ public class LevelManager : MonoBehaviour
     public void Init(int levelIndex)
     {
         if (levels == null || levels.Length == 0) return;
-        LevelDataRaw lvl = levels[levelIndex % levels.Length];
+        DataRaw lvl = levels[levelIndex % levels.Length];
         UIManager.Instance.GetBoardContainer().BuildGrid(lvl);
         if (timer != null && lvl.timeSec > 0)
         {

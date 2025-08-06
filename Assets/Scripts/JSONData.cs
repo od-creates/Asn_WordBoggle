@@ -1,6 +1,12 @@
 using UnityEngine;
 [System.Serializable]
-public class LevelDataRaw
+public class LevelCollection
+{
+    public DataRaw[] data;
+}
+
+[System.Serializable]
+public class DataRaw
 {
     public int bugCount;
     public int wordCount;

@@ -2,8 +2,8 @@ using UnityEngine;
 public class ScoreManager : MonoBehaviour
 {
     public static ScoreManager Instance { get; private set; }
-    private int totalScore;
-    private int wordCount;
+    private float totalScore;
+    private float wordCount;
     void Awake()
     {
         if (Instance != null)
@@ -19,7 +19,17 @@ public class ScoreManager : MonoBehaviour
     {
         totalScore += score;
         wordCount++;
-        UIManager.Instance.UpdateScore(totalScore, totalScore / wordCount);
+        UIManager.Instance.UpdateScore(totalScore, (float)(totalScore / wordCount));
+    }
+
+    public float GetTotalScore()
+    {
+        return totalScore;
+    }
+
+    public float GetWordCount()
+    {
+        return wordCount;
     }
 
     public void ResetScore()
