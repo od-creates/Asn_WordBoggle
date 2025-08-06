@@ -509,6 +509,7 @@ GameObject:
   - component: {fileID: 5116116270123830066}
   - component: {fileID: 2445908169933026497}
   - component: {fileID: 6828017582707571014}
+  - component: {fileID: 153841147311770257}
   m_Layer: 5
   m_Name: LetterTile
   m_TagString: Untagged
@@ -610,6 +611,7 @@ MonoBehaviour:
   highlight: {fileID: 6212738259036155807}
   bonusObj: {fileID: 45450720790491816}
   blockObj: {fileID: 990310521115680242}
+  layoutElement: {fileID: 0}
 --- !u!114 &6828017582707571014
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -624,3 +626,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dotPrefab: {fileID: 2643633103142354726, guid: 6c29f41a05eb6425c8728cece3533f17, type: 3}
   dotsContainer: {fileID: 7293174272821791593}
+--- !u!114 &153841147311770257
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6849207466271886690}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 306cc8c2b49d7114eaa3623786fc2126, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_IgnoreLayout: 0
+  m_MinWidth: -1
+  m_MinHeight: -1
+  m_PreferredWidth: -1
+  m_PreferredHeight: -1
+  m_FlexibleWidth: -1
+  m_FlexibleHeight: -1
+  m_LayoutPriority: 1

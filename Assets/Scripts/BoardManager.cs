@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class BoardManager : MonoBehaviour
+public class BoardContainer : MonoBehaviour
 {
     public GameObject letterTilePrefab;
     public GridLayoutGroup gridLayout;
@@ -35,11 +35,27 @@ public class BoardManager : MonoBehaviour
                 int idx = y * rows + x;
                 var go = Instantiate(letterTilePrefab, gridLayout.transform);
                 var tc = go.GetComponent<TileController>();
+                tc.UnlockTilePosition();
                 tc.Initialize(data.gridData[idx].letter, data.gridData[idx].tileType, new Vector2Int(x, y));
                 grid[x, y] = tc;
             }
         }
+        Canvas.ForceUpdateCanvases();
+        LayoutRebuilder.ForceRebuildLayoutImmediate(gridLayout.GetComponent<RectTransform>());
+        LockTilePositions();
     }
+
+    private void LockTilePositions()
+    {
+        for (int x = 0; x < rows; x++)
+        {
+            for (int y = 0; y < columns; y++)
+            {
+                grid[x, y].LockTilePosition();
+            }
+        }
+    }
+
     public void ClearTiles()
     {
         for(int i=0;i<gridLayout.transform.childCount;i++)

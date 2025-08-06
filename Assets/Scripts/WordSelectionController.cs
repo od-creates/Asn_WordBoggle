@@ -78,11 +78,14 @@ public class WordSelectionController : MonoBehaviour
         if (DictionaryManager.Instance.IsValid(word))
         {
             ScoreManager.Instance.AddScore(word.Length);
-            foreach (var t in selected)
-                t.Consume();
+            UIManager.Instance.GetValidWordsPanel().AddValidWord(word);
 
             if (GameManager.Instance.mode == GameMode.Endless)
+            {
+                foreach (var t in selected)
+                    t.Consume();
                 GameManager.Instance.endlessManager.OnWordFound(word);
+            }
             else
                 GameManager.Instance.levelManager.OnWordFound(word);
         }

@@ -4,13 +4,18 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance { get; private set; }
     public GameMode mode;
     public int selectedLevelIndex = 0;
-    public BoardManager boardManager;
     public LevelManager levelManager;
     public EndlessModeManager endlessManager;
 
     void Awake()
     {
-        Instance = this;
+        if (Instance != null)
+        {
+            if (Instance != this)
+                Destroy(this);
+        }
+        else
+            Instance = this;
     }
 
     public void StartGame()
@@ -29,16 +34,18 @@ public class GameManager : MonoBehaviour
 
     public void Reset()
     {
-        boardManager.ClearTiles();
+        UIManager.Instance.GetBoardContainer().ClearTiles();
+        UIManager.Instance.GetValidWordsPanel().ClearPanel();
+        ScoreManager.Instance.ResetScore();
     }
 
     public int GetBoardWidth()
     {
-        return boardManager.GetBoardWidth();
+        return UIManager.Instance.GetBoardContainer().GetBoardWidth();
     }
 
     public int GetBoardHeight()
     {
-        return boardManager.GetBoardHeight();
+        return UIManager.Instance.GetBoardContainer().GetBoardHeight();
     }
 }

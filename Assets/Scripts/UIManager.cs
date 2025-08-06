@@ -6,7 +6,19 @@ public class UIManager : MonoBehaviour
     public TextMeshProUGUI scoreText;
     public TextMeshProUGUI avgText;
     public TimerController timer;
-    void Awake() => Instance = this;
+    public ValidWordsPanel validWordsPanel;
+    public BoardContainer boardContainer;
+    void Awake()
+    {
+        if (Instance != null)
+        {
+            if (Instance != this)
+                Destroy(this);
+        }
+        else
+            Instance = this;
+    }
+
     public void UpdateScore(int total, int avg)
     {
         scoreText.text = total.ToString();
@@ -15,5 +27,15 @@ public class UIManager : MonoBehaviour
     public void UpdateTime(int seconds)
     {
         if (timer != null) timer.SetTime(seconds);
+    }
+
+    public BoardContainer GetBoardContainer()
+    {
+        return boardContainer;
+    }
+
+    public ValidWordsPanel GetValidWordsPanel()
+    {
+        return validWordsPanel;
     }
 }

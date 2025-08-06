@@ -1,5 +1,7 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
+
 [RequireComponent(typeof(BoxCollider2D))]
 public class TileController : MonoBehaviour
 {
@@ -7,6 +9,7 @@ public class TileController : MonoBehaviour
     public GameObject highlight = null;
     public GameObject bonusObj = null;
     public GameObject blockObj = null;
+
     public string Letter { get; private set; }
     public TileType Type { get; private set; }
     public Vector2Int GridPosition { get; private set; }
@@ -36,6 +39,17 @@ public class TileController : MonoBehaviour
                 break;
         }
     }
+
+    public void LockTilePosition()
+    {
+        GetComponent<LayoutElement>().ignoreLayout = true;
+    }
+
+    public void UnlockTilePosition()
+    {
+        GetComponent<LayoutElement>().ignoreLayout = false;
+    }
+
     public void Select()
     {
         highlight.SetActive(true);
@@ -51,6 +65,11 @@ public class TileController : MonoBehaviour
     }
     public bool IsAdjacentTo(TileController other)
     {
-        return Mathf.Abs(GridPosition.x - other.GridPosition.x) + Mathf.Abs(GridPosition.y - other.GridPosition.y) == 1;
+        bool adjLinear=false, adjDiagonal=false;
+        if (Mathf.Abs(GridPosition.x - other.GridPosition.x) + Mathf.Abs(GridPosition.y - other.GridPosition.y) == 1)
+            adjLinear = true;
+        else if (Mathf.Abs(GridPosition.x - other.GridPosition.x) == 1 && Mathf.Abs(GridPosition.y - other.GridPosition.y) == 1)
+            adjDiagonal = true;
+        return adjLinear || adjDiagonal;
     }
 }
