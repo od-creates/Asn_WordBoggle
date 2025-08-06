@@ -4,37 +4,56 @@ using System.Collections.Generic;
 [RequireComponent(typeof(LineRenderer))]
 public class WordHighlighter : MonoBehaviour
 {
+    [Header("Arrow Settings")]
+    [Tooltip("Prefab of a small arrow pointing along +X")]
+    [SerializeField] private GameObject arrowHeadPrefab;
+
     private LineRenderer _line;
+    private GameObject _arrowHead;
 
     void Awake()
     {
         _line = GetComponent<LineRenderer>();
-        _line.positionCount = 0;            // start with no segments
-        _line.loop = false;                 // don’t close the path
-        _line.useWorldSpace = true;         // world positions of tiles
-    }
+        _line.positionCount = 0;
+        _line.loop = false;
+        _line.useWorldSpace = true;
 
-    /// <summary>
-    /// Call this each time the player adds a new tile to the selection.
-    /// </summary>
-    /// <param name="selectedTiles">Ordered list of currently selected tiles</param>
-    public void DrawPath(List<TileController> selectedTiles)
-    {
-        Debug.LogError("Start Draw");
-        int count = selectedTiles.Count;
-        _line.positionCount = count;
-        for (int i = 0; i < count; i++)
+        // Instantiate arrow but deactivate initially
+        if (arrowHeadPrefab != null)
         {
-            // Use the tile’s world position (you can offset in z if needed)
-            _line.SetPosition(i, selectedTiles[i].transform.position);
+            _arrowHead = Instantiate(arrowHeadPrefab, transform);
+            _arrowHead.SetActive(false);
         }
     }
 
-    /// <summary>
-    /// Clears the current path (e.g. on drag-end or invalid word).
-    /// </summary>
+    public void DrawPath(List<TileController> selectedTiles)
+    {
+        int count = selectedTiles.Count;
+        _line.positionCount = count;
+
+        for (int i = 0; i < count; i++)
+            _line.SetPosition(i, selectedTiles[i].transform.position);
+
+        // only show arrow if we have at least 2 points
+        if (_arrowHead != null && count >= 2)
+        {
+            Vector3 tail = _line.GetPosition(count - 2);
+            Vector3 head = _line.GetPosition(count - 1);
+            Vector3 dir = (head - tail).normalized;
+
+            _arrowHead.SetActive(true);
+            _arrowHead.transform.position = head;
+
+            // compute angle in degrees around Z axis
+            float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
+            _arrowHead.transform.rotation = Quaternion.Euler(0, 0, angle);
+        }
+    }
+
     public void ClearPath()
     {
         _line.positionCount = 0;
+        if (_arrowHead != null)
+            _arrowHead.SetActive(false);
     }
 }
