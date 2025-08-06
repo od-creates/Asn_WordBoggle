@@ -20,6 +20,7 @@ public class WordHighlighter : MonoBehaviour
     /// <param name="selectedTiles">Ordered list of currently selected tiles</param>
     public void DrawPath(List<TileController> selectedTiles)
     {
+        Debug.LogError("Start Draw");
         int count = selectedTiles.Count;
         _line.positionCount = count;
         for (int i = 0; i < count; i++)

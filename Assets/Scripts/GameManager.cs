@@ -31,4 +31,14 @@ public class GameManager : MonoBehaviour
     {
         boardManager.ClearTiles();
     }
+
+    public int GetBoardWidth()
+    {
+        return boardManager.GetBoardWidth();
+    }
+
+    public int GetBoardHeight()
+    {
+        return boardManager.GetBoardHeight();
+    }
 }

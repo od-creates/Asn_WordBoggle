@@ -6,14 +6,15 @@ public class BoardManager : MonoBehaviour
     public GameObject letterTilePrefab;
     public GridLayoutGroup gridLayout;
     private TileController[,] grid;
+    private int columns=0, rows=0;
 
     /// <summary>
     /// Builds grid from raw level data
     /// </summary>
     public void BuildGrid(LevelDataRaw data)
     {
-        int columns = data.gridSize.x;
-        int rows = data.gridSize.y;
+        columns = data.gridSize.x;
+        rows = data.gridSize.y;
         var cellRt = letterTilePrefab.GetComponent<RectTransform>();
         float cellWidth = cellRt != null ? cellRt.rect.width : 0f;
         float cellHeight = cellRt != null ? cellRt.rect.height : 0f;
@@ -47,6 +48,9 @@ public class BoardManager : MonoBehaviour
         }
 
     }
+
+    public int GetBoardWidth() => columns;
+    public int GetBoardHeight() => rows;
     public TileController GetTile(int x, int y) => grid[x, y];
 }
 

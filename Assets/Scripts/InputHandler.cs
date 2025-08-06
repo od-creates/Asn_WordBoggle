@@ -1,8 +1,14 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
-public class InputHandler : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, IDragHandler
+public class InputHandler : MonoBehaviour
 {
-    public void OnPointerDown(PointerEventData e) => WordSelectionController.Instance.OnDragStart(e.position);
-    public void OnDrag(PointerEventData e) => WordSelectionController.Instance.OnDrag(e.position);
-    public void OnPointerUp(PointerEventData e) => WordSelectionController.Instance.OnDragEnd();
+    void Update()
+    {
+        if (Input.GetMouseButtonDown(0))
+            WordSelectionController.Instance.OnDragStart(Input.mousePosition);
+        else if (Input.GetMouseButton(0))
+            WordSelectionController.Instance.OnDrag(Input.mousePosition);
+        else if (Input.GetMouseButtonUp(0))
+            WordSelectionController.Instance.OnDragEnd();
+    }
 }
