@@ -73,7 +73,7 @@ public class WordSelectionController : MonoBehaviour
         wordHighlighter.ClearPath();  // ③
 
         // validate & score
-        if (DictionaryManager.Instance.IsValid(word))
+        if (DictionaryManager.Instance.IsValid(word) && UIManager.Instance.GetValidWordsPanel().IsUnusedValidWord(word))
         {
             int totalScore = 0;
             foreach (var t in selected)
