@@ -29,24 +29,19 @@ public class WordSelectionController : MonoBehaviour
         TrySelect(pos);
     }
 
-    void TrySelect(Vector2 pos)
+    private void TrySelect(Vector2 pos)
     {
         // Convert screen → world on the tile plane:
-        Vector3 wp3 = Camera.main.ScreenToWorldPoint(
-            new Vector3(pos.x, pos.y, Mathf.Abs(Camera.main.transform.position.z))
-        );
-        Vector2 samplePoint = wp3;
-
-        Debug.DrawLine(samplePoint + Vector2.up * 0.1f, samplePoint - Vector2.up * 0.1f, Color.red, 1f);
-        Debug.DrawLine(samplePoint + Vector2.right * 0.1f, samplePoint - Vector2.right * 0.1f, Color.red, 1f);
+        Vector3 wp3 = Camera.main.ScreenToWorldPoint(new Vector3(pos.x, pos.y, Mathf.Abs(Camera.main.transform.position.z)));
+        Vector2 touchedPoint = wp3;
 
         // Point-check for any 2D collider overlapping that spot:
-        Collider2D hitCollider = Physics2D.OverlapPoint(samplePoint);
-        if (hitCollider == null)
+        Collider2D hitCollider = Physics2D.OverlapPoint(touchedPoint);
+        if (hitCollider == null || GameManager.Instance.IsTimeUp())
             return;
 
         var tc = hitCollider.GetComponent<TileController>();
-        if (tc != null && !tc.IsLocked && tc.Type!=TileType.Blocked)
+        if (tc != null && !tc.IsLocked && tc.Type != TileType.Blocked)
         {
             if (selected.Count == 0 || tc.IsAdjacentTo(selected[selected.Count - 1]))
             {
@@ -105,6 +100,14 @@ public class WordSelectionController : MonoBehaviour
         }
 
         // reset for next drag
+        selected.Clear();
+    }
+
+    public void OnResetWordSelection()
+    {
+        foreach (var t in selected)
+            t.Deselect();
+        wordHighlighter.ClearPath();
         selected.Clear();
     }
 

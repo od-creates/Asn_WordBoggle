@@ -6,6 +6,8 @@ public class GameManager : MonoBehaviour
     public LevelManager levelManager;
     public EndlessModeManager endlessManager;
 
+    private bool isTimeUp = false;
+
     void Awake()
     {
         if (Instance != null)
@@ -41,5 +43,15 @@ public class GameManager : MonoBehaviour
         levelManager.DisableDisplayMsg();
         ScoreManager.Instance.ResetScore();
         UIManager.Instance.GetValidWordsPanel().ClearPanel();
+    }
+
+    public void SetTimeUp(bool timeUp)
+    {
+        isTimeUp = timeUp;
+    }
+
+    public bool IsTimeUp()
+    {
+        return isTimeUp;
     }
 }

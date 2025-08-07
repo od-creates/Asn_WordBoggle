@@ -19,6 +19,7 @@ public class LevelManager : MonoBehaviour
     /// </summary>
     public void Init(int levelIndex)
     {
+        GameManager.Instance.SetTimeUp(false);
         DisableDisplayMsg();
         if (levels == null || levels.Length == 0) return;
         currentLevelIndex = levelIndex % levels.Length;//wrap around
@@ -38,6 +39,8 @@ public class LevelManager : MonoBehaviour
 
     private void HandleTimeUp()
     {
+        GameManager.Instance.SetTimeUp(true);
+        WordSelectionController.Instance.OnResetWordSelection();
         var timer = UIManager.Instance.scoreBoard.GetTimer();
         if (timer != null)
             timer.OnTimerFinished -= HandleTimeUp;
