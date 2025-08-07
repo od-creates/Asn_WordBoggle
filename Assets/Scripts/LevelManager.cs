@@ -1,3 +1,5 @@
+using System;
+using System.Collections.Generic;
 using UnityEngine;
 public class LevelManager : MonoBehaviour
 {
@@ -53,14 +55,14 @@ public class LevelManager : MonoBehaviour
 
     private void ShowWinMsg()
     {
-        GameManager.Instance.Reset();
+        GameManager.Instance.ResetUI();
         levelCleared.SetActive(true);
         levelRetry.SetActive(false);
     }
 
     private void ShowRetryMsg()
     {
-        GameManager.Instance.Reset();
+        GameManager.Instance.ResetUI();
         levelCleared.SetActive(false);
         levelRetry.SetActive(true);
     }
@@ -85,5 +87,18 @@ public class LevelManager : MonoBehaviour
     public void OnWordFound(string word)
     {
         // track objectives per level
+    }
+
+    public void UnblockAdjacentBlockedTiles(List<TileController> selectedTileList, List<TileController> blockedTileList)
+    {
+        var blockedTileListCopy = new List<TileController>(blockedTileList);
+        foreach(var blockedTile in blockedTileListCopy)
+        {
+            foreach(var selectedTile in selectedTileList)
+            {
+                if (blockedTile.IsAdjacentTo(selectedTile))
+                    UIManager.Instance.GetBoardContainer().UnlockTileAndUpdateList(blockedTile);
+            }
+        }
     }
 }

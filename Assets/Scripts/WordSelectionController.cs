@@ -43,7 +43,7 @@ public class WordSelectionController : MonoBehaviour
         var tc = hitCollider.GetComponent<TileController>();
         if (tc != null && !tc.IsLocked && tc.Type != TileType.Blocked)
         {
-            if (selected.Count == 0 || tc.IsAdjacentTo(selected[selected.Count - 1]))
+            if (selected.Count == 0 || (tc.IsAdjacentTo(selected[selected.Count - 1]) && !selected[selected.Count - 1].IsLocked))
             {
                 if (!selected.Contains(tc))
                 {
@@ -96,6 +96,7 @@ public class WordSelectionController : MonoBehaviour
                 foreach (var t in selected)
                     t.Locked();
                 GameManager.Instance.levelManager.OnWordFound(word);
+                GameManager.Instance.levelManager.UnblockAdjacentBlockedTiles(selected, UIManager.Instance.boardContainer.GetBlockedTileList());
             }
         }
 

@@ -21,7 +21,8 @@ public class GameManager : MonoBehaviour
 
     public void StartGame()
     {
-        Reset();
+        ResetUI();
+        ScoreManager.Instance.ResetScore();
         switch (mode)
         {
             case GameMode.Endless:
@@ -35,13 +36,12 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void Reset()
+    public void ResetUI()
     {
         var boardContainer = UIManager.Instance.GetBoardContainer();
         boardContainer.ClearTiles();
         boardContainer.ClearLastTileIndex();
         levelManager.DisableDisplayMsg();
-        ScoreManager.Instance.ResetScore();
         UIManager.Instance.GetValidWordsPanel().ClearPanel();
     }
 

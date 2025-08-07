@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -9,6 +10,7 @@ public class BoardContainer : MonoBehaviour
     private TileController[,] grid;
     private int columns = 0, rows = 0;
     private int lastTileIndex = 0;
+    private List<TileController> blockedTiles = new List<TileController>();
 
     /// <summary>
     /// Builds grid from raw level data
@@ -44,6 +46,8 @@ public class BoardContainer : MonoBehaviour
                 var tc = go.GetComponent<TileController>();
                 tc.UnlockTilePosition();
                 tc.Initialize(data.gridData[idx].letter, data.gridData[idx].tileType, new Vector2Int(x, y));
+                if (data.gridData[idx].tileType == TileType.Blocked)
+                    blockedTiles.Add(tc);
                 grid[x, y] = tc;
             }
         }
@@ -70,7 +74,7 @@ public class BoardContainer : MonoBehaviour
         {
             Destroy(gridLayout.transform.GetChild(i).gameObject);
         }
-
+        blockedTiles.Clear();
     }
     
     public int GetLastTileIndex()
@@ -88,6 +92,13 @@ public class BoardContainer : MonoBehaviour
         lastTileIndex = 0;
     }
 
+    public void UnlockTileAndUpdateList(TileController tile)
+    {
+        tile.UnblockTile();
+        blockedTiles.Remove(tile);
+    }
+
+    public List<TileController> GetBlockedTileList() => blockedTiles;
     public int GetBoardWidth() => columns;
     public int GetBoardHeight() => rows;
     public TileController GetTile(int x, int y) => grid[x, y];

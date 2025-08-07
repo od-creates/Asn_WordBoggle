@@ -69,6 +69,13 @@ public class TileController : MonoBehaviour
         IsLocked = true;
         locked.SetActive(true);
     }
+
+    public void UnblockTile()
+    {
+        Type = TileType.Normal;
+        blockObj.SetActive(false);
+    }
+
     public void Consume()
     {
         if (Type != TileType.Blocked)
@@ -81,6 +88,6 @@ public class TileController : MonoBehaviour
             adjLinear = true;
         else if (Mathf.Abs(GridPosition.x - other.GridPosition.x) == 1 && Mathf.Abs(GridPosition.y - other.GridPosition.y) == 1)
             adjDiagonal = true;
-        return (adjLinear || adjDiagonal) && !IsLocked;
+        return adjLinear || adjDiagonal;
     }
 }

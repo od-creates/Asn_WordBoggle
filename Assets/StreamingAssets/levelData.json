@@ -11,7 +11,7 @@
       },
       "gridData": [
         {
-          "tileType": 0,
+          "tileType": 1,
           "letter": "W"
         },
         {
@@ -50,8 +50,8 @@
     },
     {
       "bugCount": 0,
-      "wordCount": 3,
-      "timeSec": 0,
+      "wordCount": 2,
+      "timeSec": 10,
       "totalScore": 0,
       "gridSize": {
         "x": 3,
@@ -79,7 +79,7 @@
           "letter": "R"
         },
         {
-          "tileType": 0,
+          "tileType": 2,
           "letter": "Y"
         },
         {
@@ -91,15 +91,15 @@
           "letter": "E"
         },
         {
-          "tileType": 0,
+          "tileType": 1,
           "letter": "W"
         }
       ]
     },
     {
       "bugCount": 0,
-      "wordCount": 4,
-      "timeSec": 0,
+      "wordCount": 3,
+      "timeSec": 15,
       "totalScore": 0,
       "gridSize": {
         "x": 4,
@@ -107,7 +107,7 @@
       },
       "gridData": [
         {
-          "tileType": 0,
+          "tileType": 1,
           "letter": "B"
         },
         {
@@ -119,7 +119,7 @@
           "letter": "E"
         },
         {
-          "tileType": 0,
+          "tileType": 2,
           "letter": "D"
         },
         {
@@ -127,7 +127,7 @@
           "letter": "N"
         },
         {
-          "tileType": 0,
+          "tileType": 1,
           "letter": "L"
         },
         {
@@ -143,7 +143,7 @@
           "letter": "O"
         },
         {
-          "tileType": 0,
+          "tileType": 2,
           "letter": "I"
         },
         {
@@ -151,11 +151,11 @@
           "letter": "A"
         },
         {
-          "tileType": 0,
+          "tileType": 2,
           "letter": "T"
         },
         {
-          "tileType": 0,
+          "tileType": 1,
           "letter": "C"
         },
         {
@@ -163,7 +163,7 @@
           "letter": "E"
         },
         {
-          "tileType": 0,
+          "tileType": 1,
           "letter": "K"
         },
         {
@@ -174,20 +174,20 @@
     },
     {
       "bugCount": 0,
-      "wordCount": 10,
-      "timeSec": 0,
-      "totalScore": 2500,
+      "wordCount": 4,
+      "timeSec": 15,
+      "totalScore": 0,
       "gridSize": {
         "x": 4,
         "y": 4
       },
       "gridData": [
         {
-          "tileType": 0,
+          "tileType": 1,
           "letter": "H"
         },
         {
-          "tileType": 0,
+          "tileType": 2,
           "letter": "E"
         },
         {
@@ -211,15 +211,15 @@
           "letter": "M"
         },
         {
-          "tileType": 0,
+          "tileType": 2,
           "letter": "E"
         },
         {
-          "tileType": 0,
+          "tileType": 2,
           "letter": "A"
         },
         {
-          "tileType": 0,
+          "tileType": 1,
           "letter": "N"
         },
         {
@@ -239,20 +239,20 @@
           "letter": "E"
         },
         {
-          "tileType": 0,
+          "tileType": 2,
           "letter": "I"
         },
         {
-          "tileType": 0,
+          "tileType": 1,
           "letter": "T"
         }
       ]
     },
     {
       "bugCount": 0,
-      "wordCount": 10,
-      "timeSec": 0,
-      "totalScore": 2500,
+      "wordCount": 3,
+      "timeSec": 15,
+      "totalScore": 0,
       "gridSize": {
         "x": 3,
         "y": 4
@@ -263,7 +263,7 @@
           "letter": "B"
         },
         {
-          "tileType": 0,
+          "tileType": 2,
           "letter": "U"
         },
         {
@@ -271,11 +271,11 @@
           "letter": "S"
         },
         {
-          "tileType": 0,
+          "tileType": 2,
           "letter": "N"
         },
         {
-          "tileType": 0,
+          "tileType": 1,
           "letter": "C"
         },
         {
@@ -287,15 +287,15 @@
           "letter": "E"
         },
         {
-          "tileType": 4,
+          "tileType": 1,
           "letter": "P"
         },
         {
-          "tileType": 0,
+          "tileType": 2,
           "letter": "H"
         },
         {
-          "tileType": 0,
+          "tileType": 1,
           "letter": "W"
         },
         {
@@ -310,9 +310,9 @@
     },
     {
       "bugCount": 0,
-      "wordCount": 10,
-      "timeSec": 0,
-      "totalScore": 4000,
+      "wordCount": 5,
+      "timeSec": 25,
+      "totalScore": 0,
       "gridSize": {
         "x": 5,
         "y": 5
@@ -422,9 +422,9 @@
     },
     {
       "bugCount": 0,
-      "wordCount": 10,
-      "timeSec": 0,
-      "totalScore": 3000,
+      "wordCount": 5,
+      "timeSec": 25,
+      "totalScore": 0,
       "gridSize": {
         "x": 4,
         "y": 4
@@ -498,9 +498,9 @@
     },
     {
       "bugCount": 0,
-      "wordCount": 10,
-      "timeSec": 0,
-      "totalScore": 3000,
+      "wordCount": 5,
+      "timeSec": 25,
+      "totalScore": 0,
       "gridSize": {
         "x": 4,
         "y": 4
@@ -515,7 +515,7 @@
           "letter": "R"
         },
         {
-          "tileType": 0,
+          "tileType": 2,
           "letter": "E"
         },
         {
@@ -535,7 +535,7 @@
           "letter": "A"
         },
         {
-          "tileType": 0,
+          "tileType": 2,
           "letter": "D"
         },
         {
@@ -551,7 +551,7 @@
           "letter": "D"
         },
         {
-          "tileType": 0,
+          "tileType": 2,
           "letter": "O"
         },
         {
