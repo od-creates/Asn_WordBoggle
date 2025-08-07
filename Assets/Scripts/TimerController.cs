@@ -7,8 +7,10 @@ public class TimerController : MonoBehaviour
 {
     [Header("UI Reference")]
     [SerializeField] private TextMeshProUGUI timeText;
+    [SerializeField] private Color normalTimerColor = Color.green;
+    [SerializeField] private Color warningTimerColor = Color.red;
 
-    private float remainingTime;
+    private float remainingTime, totalTime;
     private Coroutine timerRoutine;
 
     /// <summary>
@@ -21,6 +23,7 @@ public class TimerController : MonoBehaviour
     /// </summary>
     public void SetTime(int seconds)
     {
+        totalTime = seconds;
         remainingTime = seconds;
         UpdateDisplay();
     }
@@ -68,8 +71,6 @@ public class TimerController : MonoBehaviour
         int minutes = Mathf.FloorToInt(remainingTime / 60f);
         int seconds = Mathf.FloorToInt(remainingTime % 60f);
         timeText.text = $"{minutes:00}:{seconds:00}";
-
-        // (Optional) sync with UIManager if other UI elements depend on time
-        UIManager.Instance?.UpdateTimer((int)remainingTime);
+        timeText.color = seconds <= (int)(0.3 * totalTime) ? warningTimerColor : normalTimerColor;
     }
 }

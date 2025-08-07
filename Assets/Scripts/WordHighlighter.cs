@@ -48,6 +48,8 @@ public class WordHighlighter : MonoBehaviour
             float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
             _arrowHead.transform.rotation = Quaternion.Euler(0, 0, angle);
         }
+        else
+            _arrowHead.SetActive(false);
     }
 
     public void ClearPath()

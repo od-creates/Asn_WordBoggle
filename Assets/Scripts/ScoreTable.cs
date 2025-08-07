@@ -6,13 +6,13 @@ public static class ScoreTable
     // Define point values for each letter
     private static readonly Dictionary<char, int> table = new Dictionary<char, int>()
     {
-        { 'A', 1 }, { 'B', 3 }, { 'C', 3 }, { 'D', 2 },
-        { 'E', 1 }, { 'F', 4 }, { 'G', 2 }, { 'H', 4 },
-        { 'I', 1 }, { 'J', 8 }, { 'K', 5 }, { 'L', 1 },
-        { 'M', 3 }, { 'N', 1 }, { 'O', 1 }, { 'P', 3 },
-        { 'Q',10 }, { 'R', 1 }, { 'S', 1 }, { 'T', 1 },
-        { 'U', 1 }, { 'V', 4 }, { 'W', 4 }, { 'X', 8 },
-        { 'Y', 4 }, { 'Z',10 }
+        { 'A', 0 }, { 'B', 1 }, { 'C', 1 }, { 'D', 1 },
+        { 'E', 0 }, { 'F', 2 }, { 'G', 3 }, { 'H', 2 },
+        { 'I', 0 }, { 'J', 3 }, { 'K', 2 }, { 'L', 2 },
+        { 'M', 2 }, { 'N', 2 }, { 'O', 0 }, { 'P', 1 },
+        { 'Q', 3 }, { 'R', 1 }, { 'S', 1 }, { 'T', 2 },
+        { 'U', 0 }, { 'V', 3 }, { 'W', 2 }, { 'X', 3 },
+        { 'Y', 2 }, { 'Z',3 }
     };
 
     /// <summary>
@@ -25,7 +25,7 @@ public static class ScoreTable
         if (table.TryGetValue(letter, out var val))
             return val;
         // fallback for unexpected characters
-        Debug.LogWarning($"ScoreTable: no entry for '{letter}', defaulting to 1 point.");
-        return 1;
+        Debug.LogWarning($"ScoreTable: no entry for '{letter}', defaulting to 0 point.");
+        return 0;
     }
 }

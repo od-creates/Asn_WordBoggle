@@ -7,22 +7,28 @@ public class TileController : MonoBehaviour
 {
     public TextMeshProUGUI letterText = null;
     public GameObject highlight = null;
+    public GameObject locked = null;
     public GameObject bonusObj = null;
     public GameObject blockObj = null;
+    public ScoreIndicator scoreIndicator = null;
 
     public string Letter { get; private set; }
     public TileType Type { get; private set; }
     public Vector2Int GridPosition { get; private set; }
+    public bool IsLocked { get; private set; }
     void Awake()
     {
         highlight.SetActive(false);
         bonusObj.SetActive(false);
         blockObj.SetActive(false);
+        locked.SetActive(false);
+        IsLocked = false;
     }
     public void Initialize(string letter, TileType type, Vector2Int pos)
     {
         Letter = letter; Type = type; GridPosition = pos;
         letterText.text = letter;
+        scoreIndicator.RefreshDots();
         switch(type)
         {
             case TileType.Bonus:
@@ -58,6 +64,11 @@ public class TileController : MonoBehaviour
     {
         highlight.SetActive(false);
     }
+    public void Locked()
+    {
+        IsLocked = true;
+        locked.SetActive(true);
+    }
     public void Consume()
     {
         if (Type != TileType.Blocked)
@@ -70,6 +81,6 @@ public class TileController : MonoBehaviour
             adjLinear = true;
         else if (Mathf.Abs(GridPosition.x - other.GridPosition.x) == 1 && Mathf.Abs(GridPosition.y - other.GridPosition.y) == 1)
             adjDiagonal = true;
-        return adjLinear || adjDiagonal;
+        return (adjLinear || adjDiagonal) && !IsLocked;
     }
 }

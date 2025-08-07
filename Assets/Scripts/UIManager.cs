@@ -6,6 +6,8 @@ public class UIManager : MonoBehaviour
     public ScoreBoard scoreBoard;
     public ValidWordsPanel validWordsPanel;
     public BoardContainer boardContainer;
+    public InfoMenu infoMenu;
+    public GameObject disablePanel;
     void Awake()
     {
         if (Instance != null)
@@ -15,6 +17,7 @@ public class UIManager : MonoBehaviour
         }
         else
             Instance = this;
+        disablePanel.SetActive(true);
     }
 
     public void UpdateScore(float total, float avg)
@@ -22,16 +25,10 @@ public class UIManager : MonoBehaviour
         scoreBoard.SetTotalScoreText(total.ToString());
         scoreBoard.SetAverageScoreText(avg.ToString());
     }
-    public void UpdateTimer(int seconds)
-    {
-        var timer = scoreBoard.GetTimer();
-        if (timer != null) timer.SetTime(seconds);
-    }
 
-    public void UpdateTimerVisibility(bool enable)
+    public void UpdateLevelsUIVisibility(bool enable)
     {
-        var timer = scoreBoard.GetTimer();
-        if (timer != null) timer.gameObject.SetActive(enable);
+        scoreBoard.SetLevelsModeUI(enable);
     }
 
     public BoardContainer GetBoardContainer()
@@ -42,5 +39,26 @@ public class UIManager : MonoBehaviour
     public ValidWordsPanel GetValidWordsPanel()
     {
         return validWordsPanel;
+    }
+
+    public void OnStartGame()
+    {
+        disablePanel.SetActive(false);
+    }
+
+    public void SetInfoMenuUI(GameMode gameMode)
+    {
+        switch(gameMode)
+        {
+            case GameMode.Endless:
+                infoMenu.SetEndlessModeUI();
+                break;
+            case GameMode.Levels:
+                infoMenu.SetLevelsModeUI();
+                break;
+            default:
+                infoMenu.SetEndlessModeUI();
+                break;
+        }
     }
 }

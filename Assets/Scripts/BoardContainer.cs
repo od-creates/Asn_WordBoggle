@@ -5,6 +5,7 @@ public class BoardContainer : MonoBehaviour
 {
     public GameObject letterTilePrefab;
     public GridLayoutGroup gridLayout;
+
     private TileController[,] grid;
     private int columns = 0, rows = 0;
     private int lastTileIndex = 0;

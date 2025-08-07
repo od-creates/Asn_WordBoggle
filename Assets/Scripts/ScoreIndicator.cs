@@ -1,6 +1,5 @@
 using UnityEngine;
 
-[RequireComponent(typeof(TileController))]
 public class ScoreIndicator : MonoBehaviour
 {
     [Header("Dot Settings")]
@@ -14,7 +13,7 @@ public class ScoreIndicator : MonoBehaviour
 
     void Awake()
     {
-        tileController = GetComponent<TileController>();
+        tileController = transform.GetComponentInParent<TileController>();
     }
 
     /// <summary>

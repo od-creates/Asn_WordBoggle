@@ -18,6 +18,8 @@ public class ModeButton : MonoBehaviour
 
     private void OnClick()
     {
+        UIManager.Instance.OnStartGame();
+        UIManager.Instance.SetInfoMenuUI(buttonMode);
         GameManager.Instance.mode = buttonMode;
         GameManager.Instance.StartGame();
     }

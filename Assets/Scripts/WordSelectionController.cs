@@ -36,14 +36,9 @@ public class WordSelectionController : MonoBehaviour
             new Vector3(pos.x, pos.y, Mathf.Abs(Camera.main.transform.position.z))
         );
         Vector2 samplePoint = wp3;
-        Debug.Log($"Sampling at: {samplePoint}");
 
-        Debug.DrawLine(samplePoint + Vector2.up * 0.1f,
-               samplePoint - Vector2.up * 0.1f,
-               Color.red, 1f);
-        Debug.DrawLine(samplePoint + Vector2.right * 0.1f,
-                       samplePoint - Vector2.right * 0.1f,
-                       Color.red, 1f);
+        Debug.DrawLine(samplePoint + Vector2.up * 0.1f, samplePoint - Vector2.up * 0.1f, Color.red, 1f);
+        Debug.DrawLine(samplePoint + Vector2.right * 0.1f, samplePoint - Vector2.right * 0.1f, Color.red, 1f);
 
         // Point-check for any 2D collider overlapping that spot:
         Collider2D hitCollider = Physics2D.OverlapPoint(samplePoint);
@@ -51,13 +46,20 @@ public class WordSelectionController : MonoBehaviour
             return;
 
         var tc = hitCollider.GetComponent<TileController>();
-        int maxTiles = GameManager.Instance.GetBoardWidth() * GameManager.Instance.GetBoardHeight();
-        if (tc != null && !selected.Contains(tc) && selected.Count < maxTiles)
+        if (tc != null && !tc.IsLocked && tc.Type!=TileType.Blocked)
         {
             if (selected.Count == 0 || tc.IsAdjacentTo(selected[selected.Count - 1]))
             {
-                selected.Add(tc);
-                tc.Select();
+                if (!selected.Contains(tc))
+                {
+                    tc.Select();
+                    selected.Add(tc);
+                }
+                else if (tc == selected[selected.Count - 2])
+                {
+                    selected[selected.Count - 1].Deselect();
+                    selected.Remove(selected[selected.Count - 1]);
+                }
                 wordHighlighter.DrawPath(selected);
             }
         }
@@ -78,9 +80,15 @@ public class WordSelectionController : MonoBehaviour
         // validate & score
         if (DictionaryManager.Instance.IsValid(word))
         {
-            ScoreManager.Instance.AddScore(word.Length);
-            UIManager.Instance.GetValidWordsPanel().AddValidWord(word);
+            int totalScore = 0;
+            foreach (var t in selected)
+            {
+                int multiplier = t.Type == TileType.Bonus ? 2 : 1;
+                totalScore += ScoreTable.GetValue(char.Parse(t.Letter)) * multiplier;
+            }
 
+            ScoreManager.Instance.AddScore(totalScore);
+            UIManager.Instance.GetValidWordsPanel().AddValidWord(word);
             if (GameManager.Instance.mode == GameMode.Endless)
             {
                 foreach (var t in selected)
@@ -89,7 +97,11 @@ public class WordSelectionController : MonoBehaviour
                 GameManager.Instance.endlessManager.OnWordFound(word);
             }
             else
+            {
+                foreach (var t in selected)
+                    t.Locked();
                 GameManager.Instance.levelManager.OnWordFound(word);
+            }
         }
 
         // reset for next drag
