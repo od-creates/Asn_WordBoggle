@@ -777,7 +777,7 @@ GameObject:
   - component: {fileID: 3616728768943288600}
   - component: {fileID: 7123727132754724380}
   m_Layer: 0
-  m_Name: LevelManager
+  m_Name: LevelModeManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -816,8 +816,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92d0d51a4d22f4aed8d43cfb8a2eeb55, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  levelCleared: {fileID: 3692934814772335595}
-  levelRetry: {fileID: 3746521692884307543}
+  _LevelCleared: {fileID: 3692934814772335595}
+  _LevelRetry: {fileID: 3746521692884307543}
 --- !u!223 &3616728768943288600
 Canvas:
   m_ObjectHideFlags: 0

@@ -1,14 +1,14 @@
 using UnityEngine;
-using TMPro;
 public class UIManager : MonoBehaviour
 {
     public static UIManager Instance { get; private set; }
-    public ScoreBoard scoreBoard;
-    public ValidWordsPanel validWordsPanel;
-    public BoardContainer boardContainer;
-    public InfoMenu infoMenu;
-    public GameObject disablePanel;
-    void Awake()
+    [SerializeField] private ScoreBoard _ScoreBoard;
+    [SerializeField] private ValidWordsPanel _ValidWordsPanel;
+    [SerializeField] private BoardContainer _BoardContainer;
+    [SerializeField] private InfoMenu _InfoMenu;
+    [SerializeField] private GameObject _DisablePanel;
+
+    private void Awake()
     {
         if (Instance != null)
         {
@@ -17,33 +17,38 @@ public class UIManager : MonoBehaviour
         }
         else
             Instance = this;
-        disablePanel.SetActive(true);
+        _DisablePanel.SetActive(true);
     }
 
     public void UpdateScore(float total, float avg)
     {
-        scoreBoard.SetTotalScoreText(total.ToString());
-        scoreBoard.SetAverageScoreText(avg.ToString());
+        _ScoreBoard.SetTotalScoreText(total.ToString());
+        _ScoreBoard.SetAverageScoreText(avg.ToString());
     }
 
     public void UpdateLevelsUIVisibility(bool enable)
     {
-        scoreBoard.SetLevelsModeUI(enable);
+        _ScoreBoard.SetLevelsModeUI(enable);
     }
 
     public BoardContainer GetBoardContainer()
     {
-        return boardContainer;
+        return _BoardContainer;
+    }
+
+    public ScoreBoard GetScoreBoard()
+    {
+        return _ScoreBoard;
     }
 
     public ValidWordsPanel GetValidWordsPanel()
     {
-        return validWordsPanel;
+        return _ValidWordsPanel;
     }
 
     public void OnStartGame()
     {
-        disablePanel.SetActive(false);
+        _DisablePanel.SetActive(false);
     }
 
     public void SetInfoMenuUI(GameMode gameMode)
@@ -51,13 +56,13 @@ public class UIManager : MonoBehaviour
         switch(gameMode)
         {
             case GameMode.Endless:
-                infoMenu.SetEndlessModeUI();
+                _InfoMenu.SetEndlessModeUI();
                 break;
             case GameMode.Levels:
-                infoMenu.SetLevelsModeUI();
+                _InfoMenu.SetLevelsModeUI();
                 break;
             default:
-                infoMenu.SetEndlessModeUI();
+                _InfoMenu.SetEndlessModeUI();
                 break;
         }
     }

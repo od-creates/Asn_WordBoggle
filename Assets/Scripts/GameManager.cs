@@ -2,13 +2,13 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
-    public GameMode mode;
-    public LevelManager levelManager;
-    public EndlessModeManager endlessManager;
+    [HideInInspector] public GameMode pMode;
+    [SerializeField] private LevelModeManager _LevelModeManager;
+    [SerializeField] private EndlessModeManager _EndlessManager;
 
-    private bool isTimeUp = false;
+    private bool mIsTimeUp = false;
 
-    void Awake()
+    private void Awake()
     {
         if (Instance != null)
         {
@@ -22,18 +22,28 @@ public class GameManager : MonoBehaviour
     public void StartGame()
     {
         ResetUI();
-        ScoreManager.Instance.ResetScore();
-        switch (mode)
+        ScoreManager.Instance.ResetTotalWordCountAndScore();
+        switch (pMode)
         {
             case GameMode.Endless:
                 UIManager.Instance.UpdateLevelsUIVisibility(false);
-                endlessManager.Init();
+                _EndlessManager.Init();
                 break;
             case GameMode.Levels:
                 UIManager.Instance.UpdateLevelsUIVisibility(true);
-                levelManager.Init(0);//start from 1st level
+                _LevelModeManager.Init(0);//start from 1st level
                 break;
         }
+    }
+
+    public EndlessModeManager GetEndlessModeObj()
+    {
+        return _EndlessManager;
+    }
+
+    public LevelModeManager GetLevelsModeObj()
+    {
+        return _LevelModeManager;
     }
 
     public void ResetUI()
@@ -41,18 +51,18 @@ public class GameManager : MonoBehaviour
         var boardContainer = UIManager.Instance.GetBoardContainer();
         boardContainer.ClearTiles();
         boardContainer.ClearLastTileIndex();
-        levelManager.DisableDisplayMsg();
-        ScoreManager.Instance.ResetLevelWordCount();
+        _LevelModeManager.DisableDisplayMsg();
+        ScoreManager.Instance.ResetLevelWordCountAndScore();
         UIManager.Instance.GetValidWordsPanel().ClearPanel();
     }
 
     public void SetTimeUp(bool timeUp)
     {
-        isTimeUp = timeUp;
+        mIsTimeUp = timeUp;
     }
 
     public bool IsTimeUp()
     {
-        return isTimeUp;
+        return mIsTimeUp;
     }
 }

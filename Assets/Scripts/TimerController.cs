@@ -6,26 +6,44 @@ using System;
 public class TimerController : MonoBehaviour
 {
     [Header("UI Reference")]
-    [SerializeField] private TextMeshProUGUI timeText;
-    [SerializeField] private Color normalTimerColor = Color.green;
-    [SerializeField] private Color warningTimerColor = Color.red;
+    [SerializeField] private TextMeshProUGUI _TimeText;
+    [SerializeField] private Color _NormalTimerColor = Color.green;
+    [SerializeField] private Color _WarningTimerColor = Color.red;
 
-    private float remainingTime, totalTime;
-    private Coroutine timerRoutine;
+    private float mRemainingTime, mTotalTime;
+    private Coroutine mTimerRoutine;
+    
+    public event Action pOnTimerFinished;
 
-    /// <summary>
-    /// Raised when the countdown reaches zero.
-    /// </summary>
-    public event Action OnTimerFinished;
+    private IEnumerator RunTimer()
+    {
+        while (mRemainingTime > 0f)
+        {
+            yield return new WaitForSeconds(1f);
+            mRemainingTime--;
+            UpdateTimerDisplay();
+        }
+
+        //Time exhausted
+        pOnTimerFinished?.Invoke();
+    }
+
+    private void UpdateTimerDisplay()
+    {
+        int minutes = Mathf.FloorToInt(mRemainingTime / 60f);
+        int seconds = Mathf.FloorToInt(mRemainingTime % 60f);
+        _TimeText.text = $"{minutes:00}:{seconds:00}";
+        _TimeText.color = seconds <= (int)(0.3 * mTotalTime) ? _WarningTimerColor : _NormalTimerColor;
+    }
 
     /// <summary>
     /// Initialize the timer to a given number of seconds (but does not start it).
     /// </summary>
     public void SetTime(int seconds)
     {
-        totalTime = seconds;
-        remainingTime = seconds;
-        UpdateDisplay();
+        mTotalTime = seconds;
+        mRemainingTime = seconds;
+        UpdateTimerDisplay();
     }
 
     /// <summary>
@@ -33,44 +51,20 @@ public class TimerController : MonoBehaviour
     /// </summary>
     public void StartTimer()
     {
-        // Stop any existing coroutine so we don't double-count
-        if (timerRoutine != null)
-            StopCoroutine(timerRoutine);
+        if (mTimerRoutine != null)
+            StopCoroutine(mTimerRoutine);
 
-        timerRoutine = StartCoroutine(RunTimer());
+        mTimerRoutine = StartCoroutine(RunTimer());
     }
 
     /// <summary>
-    /// Halts the countdown (e.g. when the level ends early).
+    /// Halts the countdown
     /// </summary>
     public void StopTimer()
     {
-        if (timerRoutine != null)
-            StopCoroutine(timerRoutine);
+        if (mTimerRoutine != null)
+            StopCoroutine(mTimerRoutine);
     }
 
-    private IEnumerator RunTimer()
-    {
-        while (remainingTime > 0f)
-        {
-            yield return new WaitForSeconds(1f);
-            remainingTime--;
-            UpdateDisplay();
-        }
-
-        // Time's up!
-        OnTimerFinished?.Invoke();
-    }
-
-    /// <summary>
-    /// Formats the remainingTime into MM:SS and updates the UI text.
-    /// Also notifies UIManager if you want a centralized UI update.
-    /// </summary>
-    private void UpdateDisplay()
-    {
-        int minutes = Mathf.FloorToInt(remainingTime / 60f);
-        int seconds = Mathf.FloorToInt(remainingTime % 60f);
-        timeText.text = $"{minutes:00}:{seconds:00}";
-        timeText.color = seconds <= (int)(0.3 * totalTime) ? warningTimerColor : normalTimerColor;
-    }
+    
 }

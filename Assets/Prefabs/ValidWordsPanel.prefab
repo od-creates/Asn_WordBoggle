@@ -168,7 +168,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0.000030517578, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!114 &598039234953029383
@@ -426,9 +426,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da57dce8256194dcd920e2a211f62f4c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  validWordLayoutPrefab: {fileID: 3260117518710834919, guid: aa9696584f4e64325bd73c0c8f72a395, type: 3}
-  content: {fileID: 3483615176981130088}
-  wordCount: {fileID: 3905200413695216087}
+  _ValidWordLayoutPrefab: {fileID: 3260117518710834919, guid: aa9696584f4e64325bd73c0c8f72a395, type: 3}
+  _Content: {fileID: 3483615176981130088}
+  _WordCount: {fileID: 3905200413695216087}
 --- !u!1 &2140157906523735587
 GameObject:
   m_ObjectHideFlags: 0

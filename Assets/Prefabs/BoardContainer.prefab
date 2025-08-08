@@ -91,8 +91,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dd9ab750cf91e4a08b5e296a14dc6db2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  letterTilePrefab: {fileID: 6849207466271886690, guid: fa67b2cb6e6634f61b48766836d390ee, type: 3}
-  gridLayout: {fileID: 455781873032821916}
+  _LetterTilePrefab: {fileID: 6849207466271886690, guid: fa67b2cb6e6634f61b48766836d390ee, type: 3}
+  _GridLayout: {fileID: 455781873032821916}
 --- !u!1 &6843723934692405629
 GameObject:
   m_ObjectHideFlags: 0
@@ -313,7 +313,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 36b5170bcc2de4041822aaa58d68f988, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  arrowHeadPrefab: {fileID: 7642648815919756524, guid: f983b38648ae24dca9d28771f752ba41, type: 3}
+  _ArrowHeadPrefab: {fileID: 7642648815919756524, guid: f983b38648ae24dca9d28771f752ba41, type: 3}
 --- !u!1 &8175396936499763207
 GameObject:
   m_ObjectHideFlags: 0
@@ -362,4 +362,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 035f40f62484441a1bb9c0be3da4abd8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  wordHighlighter: {fileID: 8497835336801996206}
+  _WordHighlighter: {fileID: 8497835336801996206}

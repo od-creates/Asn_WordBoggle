@@ -617,9 +617,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8369869e9155d44f79147e9519b38fb6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeText: {fileID: 7346733093090779947}
-  normalTimerColor: {r: 0, g: 0.5943396, b: 0, a: 1}
-  warningTimerColor: {r: 0.735849, g: 0, b: 0, a: 1}
+  _TimeText: {fileID: 7346733093090779947}
+  _NormalTimerColor: {r: 0, g: 0.4528302, b: 0.10301777, a: 1}
+  _WarningTimerColor: {r: 0.7264151, g: 0, b: 0, a: 1}
 --- !u!1 &2607864588535248132
 GameObject:
   m_ObjectHideFlags: 0
@@ -1628,11 +1628,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 66593acb582734da591f45b32381895b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scoreText: {fileID: 4024846432229602168}
-  avgText: {fileID: 749801700863562974}
-  timer: {fileID: 7099637154439668745}
-  levelNoTxt: {fileID: 8758764430873169539}
-  minWordReqTxt: {fileID: 3686068897195113507}
+  _ScoreText: {fileID: 4024846432229602168}
+  _AvgText: {fileID: 749801700863562974}
+  _Timer: {fileID: 7099637154439668745}
+  _LevelNoTxt: {fileID: 8758764430873169539}
+  _MinWordReqTxt: {fileID: 3686068897195113507}
 --- !u!114 &6875974613463976565
 MonoBehaviour:
   m_ObjectHideFlags: 0

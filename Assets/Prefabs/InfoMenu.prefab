@@ -2292,9 +2292,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ea67f69602c045b1a7568880a20ad4e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  endLessUI: {fileID: 4028225973695462566}
-  levelsUI: {fileID: 259651958289659687}
-  infoTooltip: {fileID: 4952390819735273436}
+  _EndLessUI: {fileID: 4028225973695462566}
+  _LevelsUI: {fileID: 259651958289659687}
+  _InfoTooltip: {fileID: 4952390819735273436}
 --- !u!1 &6529676145096975310
 GameObject:
   m_ObjectHideFlags: 0
@@ -2931,7 +2931,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Blocked letter unlocks on making valid words with its adjacent letter
+  m_text: Blocked letter unlocks on making valid word with its adjacent letter
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}

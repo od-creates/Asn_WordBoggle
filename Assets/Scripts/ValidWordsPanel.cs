@@ -5,35 +5,37 @@ using UnityEngine;
 
 public class ValidWordsPanel : MonoBehaviour
 {
-    public GameObject validWordLayoutPrefab = null;
-    public Transform content = null;
-    public TextMeshProUGUI wordCount = null;
+    [SerializeField] private GameObject _ValidWordLayoutPrefab = null;
+    [SerializeField] private Transform _Content = null;
+    [SerializeField] private TextMeshProUGUI _WordCount = null;
 
-    private List<string> selectedValidWordList = new List<string>();
+    private List<string> mSelectedValidWordList = new List<string>();
+
+    private void UpdateWordCount()
+    {
+        _WordCount.text = ScoreManager.Instance.GetLevelWordCount().ToString();
+    }
 
     public void AddValidWord(string validWord)
     {
-        selectedValidWordList.Add(validWord);
-        var validWordObj = Instantiate(validWordLayoutPrefab, content);
+        mSelectedValidWordList.Add(validWord);
+        var validWordObj = Instantiate(_ValidWordLayoutPrefab, _Content);
         validWordObj.GetComponent<TextMeshProUGUI>().text = validWord;
         UpdateWordCount();
     }
 
     public void ClearPanel()
     {
-        for (int i = 0; i < content.childCount; i++)
-            Destroy(content.GetChild(i).gameObject);
+        for (int i = 0; i < _Content.childCount; i++)
+            Destroy(_Content.GetChild(i).gameObject);
         UpdateWordCount();
-        selectedValidWordList.Clear();
+        mSelectedValidWordList.Clear();
     }
 
     public bool IsUnusedValidWord(string word)
     {
-        return !selectedValidWordList.Contains(word);
+        return !mSelectedValidWordList.Contains(word);
     }
 
-    private void UpdateWordCount()
-    {
-        wordCount.text = ScoreManager.Instance.GetLevelWordCount().ToString();
-    }
+    
 }

@@ -1,8 +1,7 @@
 using UnityEngine;
-using UnityEngine.EventSystems;
 public class InputHandler : MonoBehaviour
 {
-    void Update()
+    private void Update()
     {
         if (Input.GetMouseButtonDown(0))
             WordSelectionController.Instance.OnDragStart(Input.mousePosition);

@@ -1,31 +1,28 @@
-using System.Collections;
-using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
 
 public class InfoMenu : MonoBehaviour
 {
-    public GameObject endLessUI;
-    public GameObject levelsUI;
-    public GameObject infoTooltip = null;
+    [SerializeField] private GameObject _EndLessUI;
+    [SerializeField] private GameObject _LevelsUI;
+    [SerializeField] private GameObject _InfoTooltip = null;
 
     public void SetEndlessModeUI()
     {
-        endLessUI.SetActive(true);
-        levelsUI.SetActive(false);
+        _EndLessUI.SetActive(true);
+        _LevelsUI.SetActive(false);
     }
 
     public void SetLevelsModeUI()
     {
-        endLessUI.SetActive(false);
-        levelsUI.SetActive(true);
+        _EndLessUI.SetActive(false);
+        _LevelsUI.SetActive(true);
     }
 
     public void OnClickInfoBtn()
     {
-        if (infoTooltip != null)
+        if (_InfoTooltip != null)
         {
-            infoTooltip.SetActive(!infoTooltip.activeInHierarchy);
+            _InfoTooltip.SetActive(!_InfoTooltip.activeInHierarchy);
         }
     }
 }

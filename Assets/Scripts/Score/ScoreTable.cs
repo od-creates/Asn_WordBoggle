@@ -4,7 +4,7 @@ using UnityEngine;
 public static class ScoreTable
 {
     // Define point values for each letter
-    private static readonly Dictionary<char, int> table = new Dictionary<char, int>()
+    private static readonly Dictionary<char, int> ScoreMap = new Dictionary<char, int>()
     {
         { 'A', 0 }, { 'B', 1 }, { 'C', 1 }, { 'D', 1 },
         { 'E', 0 }, { 'F', 2 }, { 'G', 3 }, { 'H', 2 },
@@ -22,7 +22,7 @@ public static class ScoreTable
     public static int GetValue(char letter)
     {
         letter = char.ToUpperInvariant(letter);
-        if (table.TryGetValue(letter, out var val))
+        if (ScoreMap.TryGetValue(letter, out var val))
             return val;
         // fallback for unexpected characters
         Debug.LogWarning($"ScoreTable: no entry for '{letter}', defaulting to 0 point.");

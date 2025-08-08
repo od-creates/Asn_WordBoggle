@@ -3,9 +3,9 @@ using System.Collections.Generic;
 public class DictionaryManager : MonoBehaviour
 {
     public static DictionaryManager Instance { get; private set; }
-    private HashSet<string> words;
+    private HashSet<string> mWords;
 
-    void Awake()
+    private void Awake()
     {
         if (Instance == null)
         {
@@ -16,9 +16,9 @@ public class DictionaryManager : MonoBehaviour
         else Destroy(gameObject);
     }
 
-    void LoadWords()
+    private void LoadWords()
     {
-        words = new HashSet<string>(System.StringComparer.OrdinalIgnoreCase);
+        mWords = new HashSet<string>(System.StringComparer.OrdinalIgnoreCase);
         TextAsset txt = Resources.Load<TextAsset>("wordList");
         if (txt == null)
         {
@@ -28,9 +28,9 @@ public class DictionaryManager : MonoBehaviour
         foreach (string w in txt.text.Split('\n'))
         {
             string clean = w.Trim();
-            if (!string.IsNullOrEmpty(clean)) words.Add(clean);
+            if (!string.IsNullOrEmpty(clean)) mWords.Add(clean);
         }
     }
 
-    public bool IsValid(string word) => words.Contains(word);
+    public bool IsValid(string word) => mWords.Contains(word);
 }
