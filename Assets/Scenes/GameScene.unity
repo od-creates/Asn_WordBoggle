@@ -1939,7 +1939,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7032493147444673506, guid: 748b995ce94864789ab4b16e334ac636, type: 3}
       propertyPath: m_Name
-      value: ModeButton
+      value: ModePanel
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
