@@ -46,7 +46,7 @@ public class LevelManager : MonoBehaviour
         var timer = UIManager.Instance.scoreBoard.GetTimer();
         if (timer != null)
             timer.OnTimerFinished -= HandleTimeUp;
-        int validWordCount = (int)ScoreManager.Instance.GetWordCount();
+        int validWordCount = (int)ScoreManager.Instance.GetLevelWordCount();
         if (validWordCount >= currentLevelWordCount)
             Invoke(nameof(ShowWinMsg), 1f);
         else

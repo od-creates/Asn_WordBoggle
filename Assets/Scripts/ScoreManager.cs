@@ -3,7 +3,8 @@ public class ScoreManager : MonoBehaviour
 {
     public static ScoreManager Instance { get; private set; }
     private float totalScore;
-    private float wordCount;
+    private float totalWordCount;
+    private float levelWordCount;
     void Awake()
     {
         if (Instance != null)
@@ -18,8 +19,9 @@ public class ScoreManager : MonoBehaviour
     public void AddScore(int score)
     {
         totalScore += score;
-        wordCount++;
-        UIManager.Instance.UpdateScore(totalScore, (float)(totalScore / wordCount));
+        totalWordCount++;
+        levelWordCount++;
+        UIManager.Instance.UpdateScore(totalScore, (float)(totalScore / totalWordCount));
     }
 
     public float GetTotalScore()
@@ -27,15 +29,20 @@ public class ScoreManager : MonoBehaviour
         return totalScore;
     }
 
-    public float GetWordCount()
+    public float GetLevelWordCount()
     {
-        return wordCount;
+        return levelWordCount;
+    }
+
+    public void ResetLevelWordCount()
+    {
+        levelWordCount = 0;
     }
 
     public void ResetScore()
     {
         totalScore = 0;
-        wordCount = 0;
+        totalWordCount = 0;
         UIManager.Instance.UpdateScore(0, 0);
     }
 }

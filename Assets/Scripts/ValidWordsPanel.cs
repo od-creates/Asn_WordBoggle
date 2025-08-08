@@ -34,6 +34,6 @@ public class ValidWordsPanel : MonoBehaviour
 
     private void UpdateWordCount()
     {
-        wordCount.text = ScoreManager.Instance.GetWordCount().ToString();
+        wordCount.text = ScoreManager.Instance.GetLevelWordCount().ToString();
     }
 }

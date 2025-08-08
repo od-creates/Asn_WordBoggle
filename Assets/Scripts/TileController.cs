@@ -29,7 +29,7 @@ public class TileController : MonoBehaviour
         Letter = letter; Type = type; GridPosition = pos;
         letterText.text = letter;
         scoreIndicator.RefreshDots();
-        switch(type)
+        switch (type)
         {
             case TileType.Bonus:
                 bonusObj.SetActive(true);
@@ -73,7 +73,8 @@ public class TileController : MonoBehaviour
     public void UnblockTile()
     {
         Type = TileType.Normal;
-        blockObj.SetActive(false);
+        blockObj.GetComponent<Image>().enabled = false;
+        blockObj.transform.GetChild(0).GetComponent<Animator>().gameObject.SetActive(true);
     }
 
     public void Consume()
@@ -83,7 +84,7 @@ public class TileController : MonoBehaviour
     }
     public bool IsAdjacentTo(TileController other)
     {
-        bool adjLinear=false, adjDiagonal=false;
+        bool adjLinear = false, adjDiagonal = false;
         if (Mathf.Abs(GridPosition.x - other.GridPosition.x) + Mathf.Abs(GridPosition.y - other.GridPosition.y) == 1)
             adjLinear = true;
         else if (Mathf.Abs(GridPosition.x - other.GridPosition.x) == 1 && Mathf.Abs(GridPosition.y - other.GridPosition.y) == 1)

@@ -42,6 +42,7 @@ public class GameManager : MonoBehaviour
         boardContainer.ClearTiles();
         boardContainer.ClearLastTileIndex();
         levelManager.DisableDisplayMsg();
+        ScoreManager.Instance.ResetLevelWordCount();
         UIManager.Instance.GetValidWordsPanel().ClearPanel();
     }
 
