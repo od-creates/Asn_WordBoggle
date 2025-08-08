@@ -1,37 +1,48 @@
 using UnityEngine;
-using System.IO;
+
 public static class JSONLoader
 {
     /// <summary>
-    /// Loads levels from StreamingAssets/levelData.json
+    /// Loads all levels from Resources/levelData.json
     /// </summary>
-    public static DataRaw[] LoadLevels(string fileName= "levelData")
+    public static DataRaw[] LoadLevels(string fileName = "levelData")
     {
-        string path = Path.Combine(Application.streamingAssetsPath, fileName + ".json");
-        if (!File.Exists(path))
+        // Load the TextAsset from Resources (no extension)
+        TextAsset txt = Resources.Load<TextAsset>(fileName);
+        if (txt == null)
         {
-            Debug.LogError($"Level data file not found at {path}");
+            Debug.LogError($"Level data file not found in Resources/{fileName}.json");
             return new DataRaw[0];
         }
-        string json = File.ReadAllText(path);
-        LevelCollection coll = JsonUtility.FromJson<LevelCollection>(json);
+
+        // Parse into your wrapper
+        LevelCollection coll = JsonUtility.FromJson<LevelCollection>(txt.text);
+        if (coll == null || coll.data == null)
+        {
+            Debug.LogError($"Failed to parse levels from Resources/{fileName}.json");
+            return new DataRaw[0];
+        }
+
         return coll.data;
     }
 
     /// <summary>
-    /// Loads data from StreamingAssets/endlessData.json
+    /// Loads the endless mode data from Resources/endlessData.json
     /// </summary>
     public static DataRaw LoadEndless(string fileName = "endlessData")
     {
-        string path = Path.Combine(Application.streamingAssetsPath, fileName + ".json");
-        if (!File.Exists(path))
+        TextAsset txt = Resources.Load<TextAsset>(fileName);
+        if (txt == null)
         {
-            Debug.LogError($"Endless data file not found at {path}");
+            Debug.LogError($"Endless data file not found in Resources/{fileName}.json");
             return null;
         }
-        string json = File.ReadAllText(path);
-        // Directly deserialize into your EndlessDataRaw class
-        DataRaw data = JsonUtility.FromJson<DataRaw>(json);
+
+        DataRaw data = JsonUtility.FromJson<DataRaw>(txt.text);
+        if (data == null)
+        {
+            Debug.LogError($"Failed to parse endless data from Resources/{fileName}.json");
+        }
         return data;
     }
 }
