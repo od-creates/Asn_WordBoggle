@@ -42,8 +42,6 @@ public class LevelModeManager : MonoBehaviour
     // Display Level wise retry message
     private void ShowRetryMsg()
     {
-        Debug.LogError("TotScore:" + ScoreManager.Instance.GetTotalScore() + "LevScore:" + ScoreManager.Instance.GetLevelScore());
-        Debug.LogError("TotWord:" + ScoreManager.Instance.GetTotalWordCount() + "LevWord:" + ScoreManager.Instance.GetLevelWordCount());
         var updatedScore = ScoreManager.Instance.GetTotalScore() - ScoreManager.Instance.GetLevelScore();
         var updatedWordCount = ScoreManager.Instance.GetTotalWordCount() - ScoreManager.Instance.GetLevelWordCount();
         ScoreManager.Instance.UpdateTotalScoreAndWordCount(updatedScore, updatedWordCount);
